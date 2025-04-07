@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digi Comms Toolkit - App</title>
+<meta content="A modern toolkit for digital communications excellence: brand, content, SEO, UX, analytics, and strategy." name="description"/>
+<!-- Favicon generated using asset generator -->
+<link href="assets/sprite_32x32_9fcf07be.png" rel="icon" type="image/png"/>
+<!-- OG Meta Tags -->
+<meta content="Digi Comms Toolkit - App" property="og:title"/>
+<meta content="Your go-to resource for digital communication best practices, presented in a sleek app format." property="og:description"/>
+<meta content="assets/img_1200x630_8f242fd6.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- Google Fonts - Barlow -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="assets/style_88bb4edb.css" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="assets/script_3bc92997.js"></script>
+<!-- Tailwind Configuration -->
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Barlow', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-red': '#ad1a32',
+                        'dark-text': '#2f2f2f',
+                        'accent-yellow': '#ffd400',
+                        'light-bg': '#e5e5e5',
+                        'white': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Font Awesome -->
+<link href="assets/style_31a9a8f7.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_7059d745.js"></script>
+<style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-regular-400';
+            src: url('/chat/webfonts/fa-regular-400.woff2') format('woff2'),
+                 url('/chat/webfonts/fa-regular-400.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-solid-900';
+            src: url('/chat/webfonts/fa-solid-900.woff2') format('woff2'),
+                 url('/chat/webfonts/fa-solid-900.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-path: '/chat/webfonts/fa-brands-400';
+            src: url('/chat/webfonts/fa-brands-400.woff2') format('woff2'),
+                 url('/chat/webfonts/fa-brands-400.ttf') format('truetype');
+        }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Barlow', sans-serif;
+            padding-top: 80px; /* Adjust based on nav height */
+        }
+        /* Active nav link style */
+        .nav-link.active {
+            color: #ffd400; /* accent-yellow */
+            font-weight: 700; /* bold */
+            border-bottom: 3px solid #ffd400; /* accent-yellow */
+            padding-bottom: 5px; /* Adjust as needed */
+        }
+        /* Style for section headings (Accordion Trigger) */
+        .accordion-header {
+            color: #ad1a32; /* primary-red */
+            font-weight: 900; /* black */
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .accordion-header:hover {
+            background-color: #f0f0f0; /* Slightly lighter grey on hover */
+        }
+        .accordion-header .icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-header.active .icon {
+            transform: rotate(180deg);
+        }
+
+        /* Style for section sub-headings */
+        .accordion-content h3 {
+            color: #2f2f2f; /* dark-text */
+            font-weight: 700; /* bold */
+        }
+        /* Link styles */
+        a {
+            color: #ad1a32; /* primary-red */
+            transition: color 0.2s ease-in-out;
+            font-weight: 600; /* Make links slightly bolder */
+        }
+        a:hover {
+            color: #ffd400; /* accent-yellow */
+            text-decoration: underline;
+        }
+        /* Accordion Content Styling */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-left: 1rem; /* Indent content slightly */
+            padding-right: 1rem;
+            border-top: 1px solid #e5e5e5; /* Separator line */
+        }
+        .accordion-content.active {
+             /* Set a large enough max-height or calculate dynamically */
+             max-height: 2000px; /* Adjust if content is very long */
+             padding-top: 1.5rem;
+             padding-bottom: 1.5rem;
+        }
+
+        /* Section container styling */
+        section {
+            background-color: #ffffff; /* white */
+            border: 1px solid #e5e5e5; /* light-bg */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s ease-in-out;
+            overflow: hidden; /* Needed for accordion transition */
+        }
+        section:hover {
+             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+        /* Custom list bullets */
+        ul.list-disc li::marker {
+          color: #ad1a32; /* primary-red */
+        }
+
+    </style>
+<!-- Papa Parse -->
+<script src="assets/script_1eaaf516.js"></script>
+<script>
+            window.load_data_from_csv = (filename) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.save_data_to_csv = (filename, data) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.call_llm = (system_prompt, user_messages, json_fields) => {
+                // Implementation needed when code is downloaded
+            };
+        </script></head>
+<body class="bg-light-bg text-dark-text">
+<!-- Floating Top Navigation -->
+<nav class="bg-dark-text text-white p-4 fixed top-0 left-0 right-0 z-50 shadow-lg h-[80px] flex items-center justify-center">
+<div class="container mx-auto flex justify-between items-center">
+<div class="text-xl font-black text-accent-yellow uppercase tracking-wider">Digi Comms Toolkit</div>
+<ul class="flex space-x-6 items-center">
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#brand"><i aria-hidden="true" class="fas fa-palette mr-1"></i>Brand</a></li>
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#writing"><i aria-hidden="true" class="fas fa-pencil-alt mr-1"></i>Writing</a></li>
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#seo"><i aria-hidden="true" class="fas fa-search mr-1"></i>SEO</a></li>
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#ux"><i aria-hidden="true" class="fas fa-users-cog mr-1"></i>UX</a></li>
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#analytics"><i aria-hidden="true" class="fas fa-chart-line mr-1"></i>Analytics</a></li>
+<li><a class="nav-link hover:text-accent-yellow transition-colors duration-200 pb-2" href="#strategy"><i aria-hidden="true" class="fas fa-clipboard-list mr-1"></i>Strategy</a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 p-8 pt-12">
+<div class="max-w-5xl mx-auto space-y-6">
+<!-- Section 1: Brand Guidelines Adherence and Visual Design -->
+<section class="rounded-lg scroll-mt-[100px]" id="brand">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-palette mr-3"></i>Brand &amp; Visuals</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Brand Guidelines</h3>
+<p class="mb-4">Consistency is key. Your brand's voice and look must be uniform across all touchpoints. Follow the rulebook on:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Logo Use:</strong> Correct versions, spacing, size limits, and placement. No stretching!</li>
+<li><strong>Colors:</strong> Stick to the defined primary, secondary, and accent palettes (HEX/RGB).</li>
+<li><strong>Typography:</strong> Use approved fonts (like Barlow!), weights, and sizes consistently.</li>
+<li><strong>Imagery:</strong> Maintain the agreed style, tone, and quality for all visuals.</li>
+</ul>
+<p class="mb-6">Resource: <a href="https://www.digital.govt.nz/standards-and-guidance/design-and-ux/visual-identity-and-branding/" rel="noopener noreferrer" target="_blank">NZ Govt - Visual Identity &amp; Branding</a></p>
+<h3 class="text-2xl mb-3">Visual Design Craft</h3>
+<p class="mb-4">Create designs that are not just beautiful but also intuitive and effective. Focus on:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Layout:</strong> Use grids, hierarchy, and white space for clarity and balance.</li>
+<li><strong>Trends:</strong> Be aware, but prioritize timeless usability and brand fit.</li>
+<li><strong>Tools:</strong> Master your tools (Figma, Adobe Suite, etc.) for efficient creation.</li>
+<li><strong>Accessibility:</strong> Design for everyone. Check contrast, readability, and navigation. See <a href="https://sportnz.org.nz/accessibility/accessibility-introduction/" rel="noopener noreferrer" target="_blank">Sport NZ Accessibility</a>.</li>
+</ul>
+<p>Resource: <a href="https://www.digital.govt.nz/standards-and-guidance/design-and-ux/visual-design/" rel="noopener noreferrer" target="_blank">NZ Govt - Visual Design Standards</a></p>
+</div>
+</section>
+<!-- Section 2: Writing for Web -->
+<section class="rounded-lg scroll-mt-[100px]" id="writing">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-pencil-alt mr-3"></i>Web Copywriting</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Content Creation</h3>
+<p class="mb-4">Write for scanners, not readers. Make every word count:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Headlines:</strong> Hook readers instantly. Be clear, compelling, and keyword-aware.</li>
+<li><strong>Body:</strong> Short paragraphs, bullet points, bold text. Guide the eye.</li>
+<li><strong>CTAs:</strong> Tell users exactly what to do next. Make it obvious.</li>
+<li><strong>User Focus:</strong> Solve their problems, answer their questions. It's about them.</li>
+</ul>
+<p class="mb-6">Resource: <a href="https://www.digital.govt.nz/standards-and-guidance/content/writing-for-the-web/" rel="noopener noreferrer" target="_blank">NZ Govt - Writing for the Web</a></p>
+<h3 class="text-2xl mb-3">Tone &amp; Style</h3>
+<p class="mb-4">Define your brand's personality and stick to it. Is it witty? Formal? Energetic?</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li>Establish formality level.</li>
+<li>Decide on jargon use (usually: avoid).</li>
+<li>Keep sentence structure varied but clear.</li>
+</ul>
+<h3 class="text-2xl mb-3">Polish &amp; Proof</h3>
+<p class="mb-4">Errors kill credibility. Be meticulous:</p>
+<ul class="list-disc list-inside ml-4 space-y-2">
+<li>Grammar, spelling, punctuation check.</li>
+<li>Fact-check everything.</li>
+<li>Read aloud to catch awkward flow.</li>
+<li>Use tools (e.g., <a href="https://app.grammarly.com/" rel="noopener noreferrer" target="_blank">Grammarly</a>) but don't rely solely on them.</li>
+</ul>
+</div>
+</section>
+<!-- Section 3: SEO Best Practices -->
+<section class="rounded-lg scroll-mt-[100px]" id="seo">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-search mr-3"></i>SEO Strategy</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Keyword Mastery</h3>
+<p class="mb-4">Understand what your audience searches for. Target the right terms:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li>Use tools (<a href="https://ads.google.com/home/tools/keyword-planner/" rel="noopener noreferrer" target="_blank">Google Keyword Planner</a>, SEMrush, Ahrefs).</li>
+<li>Balance search volume, relevance, and competition.</li>
+<li>Weave keywords naturally into titles, headings, and body copy.</li>
+</ul>
+<h3 class="text-2xl mb-3">On-Page Optimisation</h3>
+<p class="mb-4">Make search engines understand and love your pages:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Meta Tags:</strong> Craft clickable titles and informative descriptions.</li>
+<li><strong>Headers:</strong> Structure content logically (H1, H2, etc.).</li>
+<li><strong>Alt Text:</strong> Describe images accurately for accessibility and SEO.</li>
+<li><strong>Internal Links:</strong> Connect related content within your site.</li>
+<li><strong>URLs:</strong> Keep them short, descriptive, and clean.</li>
+</ul>
+<p class="mb-6">Resource: <a href="https://moz.com/learn/seo/on-page-seo" rel="noopener noreferrer" target="_blank">Moz - On-Page SEO</a></p>
+<h3 class="text-2xl mb-3">Off-Page Authority</h3>
+<p class="mb-4">Build trust and reputation beyond your website:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Backlinks:</strong> Earn links from relevant, high-quality sites. Quality &gt; Quantity.</li>
+<li><strong>Brand Mentions:</strong> Build recognition and authority.</li>
+<li><strong>Social Signals:</strong> Engage on social media to amplify reach (indirect SEO benefit).</li>
+</ul>
+<p>Resource: <a href="https://ahrefs.com/blog/off-page-seo/" rel="noopener noreferrer" target="_blank">Ahrefs - Off-Page SEO</a></p>
+</div>
+</section>
+<!-- Section 4: UX Considerations -->
+<section class="rounded-lg scroll-mt-[100px]" id="ux">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-users-cog mr-3"></i>User Experience (UX)</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Know Your Users</h3>
+<p class="mb-4">Design starts with empathy. Understand who you're designing for:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Research:</strong> Use surveys, interviews, analytics to uncover needs and pain points.</li>
+<li><strong>Personas:</strong> Create fictional representations of your key user types.</li>
+<li><strong>Journey Maps:</strong> Visualize how users interact with your service/product.</li>
+</ul>
+<p class="mb-6">Resource: <a href="https://www.digital.govt.nz/standards-and-guidance/digital-service-design-standard/principles/identify-your-users-and-understand-their-ongoing-needs/" rel="noopener noreferrer" target="_blank">NZ Govt - Understand Users</a></p>
+<h3 class="text-2xl mb-3">Design &amp; Test</h3>
+<p class="mb-4">Visualize structure and flow before coding:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Wireframes:</strong> Sketch basic layouts and content placement.</li>
+<li><strong>Prototypes:</strong> Create interactive mockups for testing user flows.</li>
+<li><strong>Tools:</strong> Leverage <a href="https://www.figma.com/" rel="noopener noreferrer" target="_blank">Figma</a>, Sketch, Adobe XD etc.</li>
+</ul>
+<h3 class="text-2xl mb-3">Usability Testing</h3>
+<p class="mb-4">Watch real people use your design. Find what breaks:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li>Observe users performing key tasks.</li>
+<li>Identify confusion, frustration, and roadblocks.</li>
+<li>Iterate based on feedback. Don't guess, test!</li>
+</ul>
+<p class="mb-2">Resource: <a href="https://www.nngroup.com/articles/usability-testing-101/" rel="noopener noreferrer" target="_blank">NN/g - Usability Testing 101</a></p>
+<p>Resource: <a href="https://sportnz.org.nz/accessibility/accessibility-introduction/" rel="noopener noreferrer" target="_blank">Sport NZ Accessibility Guide</a></p>
+</div>
+</section>
+<!-- Section 5: Analytics and Performance Tracking -->
+<section class="rounded-lg scroll-mt-[100px]" id="analytics">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-chart-line mr-3"></i>Analytics &amp; Performance</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Measurement Tools</h3>
+<p class="mb-4">Track what matters. Use data to inform decisions:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong><a href="https://analytics.google.com/" rel="noopener noreferrer" target="_blank">Google Analytics 4</a>:</strong> The industry standard. Master its event-based model.</li>
+<li><strong><a href="https://search.google.com/search-console/" rel="noopener noreferrer" target="_blank">Google Search Console</a>:</strong> Monitor organic search performance and site health.</li>
+<li><strong>Heatmaps/Recordings:</strong> Tools like Hotjar show *how* users interact.</li>
+</ul>
+<h3 class="text-2xl mb-3">Key Metrics (KPIs)</h3>
+<p class="mb-4">Focus on metrics that align with your goals:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Traffic:</strong> Users, Sessions, Pageviews.</li>
+<li><strong>Engagement:</strong> Engagement Rate, Avg. Engagement Time, Scrolls.</li>
+<li><strong>Conversions:</strong> Goal Completions, Conversion Rate (specific to your goals).</li>
+<li><strong>Source/Medium:</strong> Where is traffic coming from?</li>
+<li><strong>Top Content:</strong> What resonates most?</li>
+</ul>
+<h3 class="text-2xl mb-3">Data Interpretation</h3>
+<p class="mb-4">Data is useless without insight. Look for trends, ask 'why':</p>
+<ul class="list-disc list-inside ml-4 space-y-2">
+<li>Compare periods (YoY, MoM).</li>
+<li>Segment data (by device, location, traffic source).</li>
+<li>Correlate data points (e.g., traffic source vs. conversion rate).</li>
+<li>Form hypotheses and test them.</li>
+</ul>
+</div>
+</section>
+<!-- Section 6: Content Strategy -->
+<section class="rounded-lg scroll-mt-[100px]" id="strategy">
+<h2 class="accordion-header text-3xl p-6 flex justify-between items-center">
+<span><i aria-hidden="true" class="fas fa-clipboard-list mr-3"></i>Content Strategy</span>
+<span class="icon text-xl"><i class="fas fa-chevron-down"></i></span>
+</h2>
+<div class="accordion-content text-dark-text text-base leading-relaxed">
+<h3 class="text-2xl mb-3">Audience Deep Dive</h3>
+<p class="mb-4">Content fails if it doesn't connect. Know who you're talking to:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li>Demographics, psychographics, needs, pain points.</li>
+<li>Where do they hang out online?</li>
+<li>What questions are they asking?</li>
+<li>Develop detailed personas.</li>
+</ul>
+<h3 class="text-2xl mb-3">Strategic Planning</h3>
+<p class="mb-4">Create content with purpose. Plan your attack:</p>
+<ul class="list-disc list-inside ml-4 space-y-2 mb-6">
+<li><strong>Editorial Calendar:</strong> Map topics, formats, channels, dates.</li>
+<li><strong>Content Audit:</strong> What exists? What works? What's missing?</li>
+<li><strong>Topic Clusters:</strong> Build authority around core themes.</li>
+<li><strong>Format Mix:</strong> Blog posts, video, infographics, podcasts? Match format to goal.</li>
+</ul>
+<p class="mb-6">Resource: <a href="https://contentmarketinginstitute.com/developing-a-strategy/" rel="noopener noreferrer" target="_blank">CMI - Content Strategy</a></p>
+<h3 class="text-2xl mb-3">Distribution &amp; Promotion</h3>
+<p class="mb-4">Great content needs visibility. Get it seen:</p>
+<ul class="list-disc list-inside ml-4 space-y-2">
+<li><strong>Owned:</strong> Website, blog, email list.</li>
+<li><strong>Earned:</strong> PR, guest posts, social shares, SEO.</li>
+<li><strong>Paid:</strong> Social ads, SEM, influencer marketing.</li>
+<li>Tailor promotion to the channel and audience.</li>
+<li>Repurpose content across platforms.</li>
+</ul>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="mt-16 text-center text-dark-text/70 text-base py-6 border-t border-light-bg">
+            Copyright Guy Fraser 2025 | Digi Comms Toolkit
+        </footer>
+</main>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            // --- Accordion Logic ---
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.icon i');
+                    const isActive = header.classList.contains('active');
+
+                    // Optional: Close other accordions when one is opened
+                    // accordionHeaders.forEach(h => {
+                    //     if (h !== header && h.classList.contains('active')) {
+                    //         h.classList.remove('active');
+                    //         h.nextElementSibling.classList.remove('active');
+                    //         h.querySelector('.icon i').classList.remove('fa-chevron-up');
+                    //         h.querySelector('.icon i').classList.add('fa-chevron-down');
+                    //     }
+                    // });
+
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+
+                    if (header.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                        // Scroll to the header if it's opened and partially out of view
+                        setTimeout(() => { // Timeout allows transition to start
+                            const headerRect = header.getBoundingClientRect();
+                            if (headerRect.top < navHeight) {
+                                window.scrollBy({ top: headerRect.top - navHeight - 10, behavior: 'smooth' });
+                            }
+                        }, 300); // Adjust timing if needed
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+
+            // --- Nav Link Highlighting on Scroll (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: `-${navHeight + 20}px 0px -40% 0px`, // Adjust bottom margin to trigger earlier
+                threshold: 0 // Trigger as soon as any part enters/leaves the margin
+            };
+
+            let currentActiveSectionId = null;
+
+            const observer = new IntersectionObserver((entries) => {
+                let bestVisibleSection = null;
+
+                entries.forEach(entry => {
+                    const sectionTop = entry.boundingClientRect.top;
+                    const sectionBottom = entry.boundingClientRect.bottom;
+                    const viewportHeight = window.innerHeight;
+
+                    // Check if section is intersecting within the top ~60% of the viewport below the nav
+                    if (entry.isIntersecting && sectionTop < (viewportHeight * 0.6)) {
+                         // If multiple are visible, prioritize the one closest to the top nav bar
+                         if (!bestVisibleSection || sectionTop < bestVisibleSection.boundingClientRect.top) {
+                             bestVisibleSection = entry.target;
+                         }
+                    }
+                });
+
+                 // Fallback: If no section is clearly visible near the top, find the last one whose top passed the nav bar
+                 if (!bestVisibleSection) {
+                     for (let i = sections.length - 1; i >= 0; i--) {
+                         if (sections[i].getBoundingClientRect().top < navHeight + 50) {
+                             bestVisibleSection = sections[i];
+                             break;
+                         }
+                     }
+                 }
+
+                 if (bestVisibleSection) {
+                    currentActiveSectionId = bestVisibleSection.id;
+                 } else if (window.scrollY < sections[0].offsetTop - navHeight - 50) {
+                     currentActiveSectionId = null; // Scrolled above the first section
+                 }
+
+
+                // Update active link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (currentActiveSectionId && link.getAttribute('href') === `#${currentActiveSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Handle Nav Link Clicks ---
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault(); // Prevent default jump
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            const targetHeader = targetSection.querySelector('.accordion-header');
+
+                            // Open the target accordion if it's not already open
+                            if (targetHeader && !targetHeader.classList.contains('active')) {
+                                targetHeader.click(); // Simulate click to open smoothly
+                                // Wait for accordion to open before scrolling
+                                setTimeout(() => {
+                                     window.scrollTo({
+                                        top: targetSection.offsetTop - navHeight - 10, // Adjust offset
+                                        behavior: 'smooth'
+                                    });
+                                }, 550); // Match accordion transition time + buffer
+                            } else {
+                                // If already open or no header, just scroll
+                                window.scrollTo({
+                                    top: targetSection.offsetTop - navHeight - 10, // Adjust offset
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+
+             // Handle initial load based on hash
+             setTimeout(() => {
+                 const hash = window.location.hash;
+                 if (hash) {
+                     const targetSection = document.querySelector(hash);
+                     if (targetSection) {
+                         const targetHeader = targetSection.querySelector('.accordion-header');
+                         if (targetHeader && !targetHeader.classList.contains('active')) {
+                             targetHeader.click(); // Open accordion
+                         }
+                         // Scroll after a delay to allow accordion animation
+                         setTimeout(() => {
+                             window.scrollTo({
+                                 top: targetSection.offsetTop - navHeight - 10,
+                                 behavior: 'auto' // Use 'auto' for initial load jump
+                             });
+                             // Force update observer after jump/accordion open
+                             observer.takeRecords().forEach(entry => observer.callback([entry], observer));
+
+                         }, 550);
+                     }
+                 } else {
+                    // Optionally open the first accordion by default on load
+                    // if (accordionHeaders.length > 0) {
+                    //     accordionHeaders[0].click();
+                    // }
+                 }
+             }, 100); // Delay to ensure layout stability
+
+        });
+    </script>
+</body></html>
